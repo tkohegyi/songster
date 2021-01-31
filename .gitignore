@@ -1,0 +1,11 @@
+.idea
+.gradle
+**/log
+*.log
+build
+bin
+release
+out
+secure*.properties
+*.sh
+~*.*

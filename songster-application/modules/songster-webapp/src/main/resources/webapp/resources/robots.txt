@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /songsterSecure/
+Disallow: /resources/json/
+Disallow: /resources/js/
+Disallow: /resources/css/
+Disallow: /resources/img/*.png
+Disallow: /resources/img/*.xcf
