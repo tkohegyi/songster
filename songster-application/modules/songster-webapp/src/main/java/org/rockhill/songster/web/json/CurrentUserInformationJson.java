@@ -10,8 +10,6 @@ public class CurrentUserInformationJson {
     @JsonField
     public boolean isLoggedIn;
     @JsonField
-    public boolean isAuthorized;
-    @JsonField
     public Long socialId;
     @JsonField
     public String socialEmail;
@@ -23,6 +21,8 @@ public class CurrentUserInformationJson {
     public boolean isPrivilegedUser;
     @JsonField
     public boolean isRegisteredUser;
+    @JsonField
+    public boolean isGuest;
     @JsonField
     public String socialServiceUsed;
 
@@ -40,9 +40,11 @@ public class CurrentUserInformationJson {
         socialId = null;
         socialEmail = "";
         isLoggedIn = false;
-        isAuthorized = false;
         loggedInUserName = "Anonymous";
         isAdmin = false;
+        isPrivilegedUser = false;
+        isRegisteredUser = false;
+        isGuest = false;
         socialServiceUsed = "Undetermined";
     }
 
@@ -58,5 +60,10 @@ public class CurrentUserInformationJson {
             email = social.getFacebookEmail();
         }
         socialEmail = email;
+        Integer userLevel = social.getSocialStatus();
+        isGuest = userLevel > 1;
+        isRegisteredUser = userLevel > 2;
+        isPrivilegedUser = userLevel > 3;
+        isAdmin = userLevel > 4;
     }
 }

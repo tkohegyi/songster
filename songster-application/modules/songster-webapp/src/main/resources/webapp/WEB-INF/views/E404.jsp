@@ -26,13 +26,13 @@
 		<br />
     </div>
     <div class="centerwidediv">
-		Egy olyan kérés érkezett az Örökimádás weboldalára, amely sajnos nem teljesíthető.
+		Egy olyan kérés érkezett a weboldalra, amely sajnos nem teljesíthető.
 		Az oldal üzemeltetői kaptak egy emlékeztetőt erről a hibáról, és már dolgoznak is azon, hogy ez máskor ne fordulhasson elő.
 		Addig is türelmét kérjuk, mert a hiba kijavítása akár több napot is igénybe vehet.
 		<br/>
     <hr />
 		<br/>
-		<div class="textWebkitCenter">A fenti menüsort használva folytassa a tevékenységét, vagy várjon 10 másodpercet, és az oldal újratöltődik az Örökimádás fő oldalával.</div>
+		<div class="textWebkitCenter">A fenti menüsort használva folytassa a tevékenységét, vagy várjon 10 másodpercet, és az oldal újratöltődik a weblap fő oldalával.</div>
 		<br />
 	</div>
   </div>

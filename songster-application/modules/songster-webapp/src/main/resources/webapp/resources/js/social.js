@@ -26,7 +26,6 @@ function setupSocialTable() {
         "scrollX": true,
         "columns": [
             { "data": "id" },
-            { "data": "personId", "width": "200px" },
             { "data": "socialStatus" },
             { "data": "googleUserName" },
             { "data": "googleUserPicture" },
@@ -41,7 +40,7 @@ function setupSocialTable() {
         "columnDefs": [
             {
                 "className": "text-center",
-                "targets": [0,1,2,3,4,5,6,7,8,9,10,11]
+                "targets": [0,1,2,3,4,5,6,7,8,9,10]
             },
             {
                 "render": function ( data, type, row ) {
@@ -54,27 +53,17 @@ function setupSocialTable() {
             {
                 "render": function ( data, type, row ) {
                     var z;
-                    if (data != null) {
-                        z = data;
-                    } else {
-                        z = "Nem tudjuk ki...";
-                    }
-                    return z;
-                },
-                "targets": 1
-            },
-            {
-                "render": function ( data, type, row ) {
-                    var z;
                     switch (data) {
                     case 1: z = 'Azonosításra vár'; break;
-                    case 2: z = 'Azonosított adoráló'; break;
-                    case 3: z = 'Vendég/érdeklődő'; break;
+                    case 2: z = 'Vendég'; break;
+                    case 3: z = 'Regisztrált'; break;
+                    case 4: z = 'Privilegizált'; break;
+                    case 5: z = 'Adminisztrátor'; break;
                     default: z = '???';
                     }
                     return z;
                 },
-                "targets": 2
+                "targets": 1
             },
             {
                 "render": function ( data, type, row ) {
@@ -86,7 +75,7 @@ function setupSocialTable() {
                     }
                     return z;
                 },
-                "targets": 4
+                "targets": 3
             }
         ]
     } );
@@ -131,7 +120,7 @@ function reBuildHistoryModal(id) {
             }
         } else { //logged out or other error at server side
             showAlert("Figyelem!", "Önnek ismét be kell jelentkeznie.",
-                function () {window.location.pathname = "/adoration/"});
+                function () {window.location.pathname = "/songster/"});
             return;
         }
     });

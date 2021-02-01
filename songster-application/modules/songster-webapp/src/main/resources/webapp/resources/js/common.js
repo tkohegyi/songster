@@ -4,16 +4,18 @@ function setupMenu() {
     jQuery.ajaxSetup({async:false});
     $.get('/songster/getLoggedInUserInfo', function(data) {
         loggedInUserInfo = data.loggedInUserInfo;
-        if (loggedInUserInfo.isRegisteredUser) {
+        if (loggedInUserInfo.isLoggedIn) {
             $("#loggedInUserLegend").text("Belépve: " + loggedInUserInfo.loggedInUserName);
-            $("#nav-home").show();
-            $("#nav-plan").show();
-            $("#nav-play").show();
             $("#nav-exit").show();
         } else {
             $("#loggedInUserLegend").text("");
             $("#nav-login").show();
         }
+        if (loggedInUserInfo.isRegisteredUser) {
+            $("#nav-home").show();
+            $("#nav-plan").show();
+            $("#nav-play").show();
+            }
         if (loggedInUserInfo.isAdmin) {
             $("#nav-application-log").show();
         }

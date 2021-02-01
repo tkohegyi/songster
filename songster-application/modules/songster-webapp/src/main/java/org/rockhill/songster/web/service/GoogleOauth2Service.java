@@ -55,7 +55,7 @@ public class GoogleOauth2Service extends Oauth2ServiceBase {
     private GoogleAuthorizationCodeFlow flow;
 
     @Autowired
-    private AdorationCustomAuthenticationProvider adorationCustomAuthenticationProvider;
+    private ApplicationCustomAuthenticationProvider applicationCustomAuthenticationProvider;
     @Autowired
     private WebAppConfigurationAccess webAppConfigurationAccess;
     @Autowired
@@ -122,7 +122,7 @@ public class GoogleOauth2Service extends Oauth2ServiceBase {
             googleUser = new GoogleUser(social, propertyDto.getSessionTimeout());
 
             //googleUser used as Principal, credential is coming from Google
-            authentication = adorationCustomAuthenticationProvider.authenticate(new PreAuthenticatedAuthenticationToken(googleUser, credential));
+            authentication = applicationCustomAuthenticationProvider.authenticate(new PreAuthenticatedAuthenticationToken(googleUser, credential));
         } catch (Exception ex) {
             logger.warn("Was unable to get Google User Information.", ex);
         }

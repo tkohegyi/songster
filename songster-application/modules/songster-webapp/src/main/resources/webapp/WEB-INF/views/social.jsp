@@ -38,7 +38,6 @@
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">Adoráló regisztrált neve</th>
                             <th scope="col">Státusz</th>
                             <th scope="col">Google - username</th>
                             <th scope="col">Google - picture</th>
@@ -54,7 +53,6 @@
                     <tfoot>
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">Adoráló regisztrált neve</th>
                             <th scope="col">Státusz</th>
                             <th scope="col">Google - username</th>
                             <th scope="col">Google - picture</th>

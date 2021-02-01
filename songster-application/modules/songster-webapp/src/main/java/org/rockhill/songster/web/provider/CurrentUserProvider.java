@@ -21,7 +21,6 @@ import static org.springframework.security.web.context.HttpSessionSecurityContex
  */
 @Component
 public class CurrentUserProvider {
-    private static final String GUEST_NAME_INTRO = "Vend\u00e9g - ";
 
     @Autowired
     private BusinessWithAuditTrail businessWithAuditTrail;
@@ -62,15 +61,14 @@ public class CurrentUserProvider {
         Social social;
         CurrentUserInformationJson currentUserInformationJson = new CurrentUserInformationJson();
         currentUserInformationJson.isLoggedIn = true;  // if authentication is not null then the person is logged in
-        userName = "Anonymous";
-        loggedInUserName = GUEST_NAME_INTRO + userName;
+        loggedInUserName = "Anonymous";
         if (user instanceof GoogleUser) {
             userName = user.getSocial().getGoogleUserName();
-            loggedInUserName = GUEST_NAME_INTRO + userName;
+            loggedInUserName = userName;
         }
         if (user instanceof FacebookUser) {
             userName = user.getSocial().getFacebookUserName();
-            loggedInUserName = GUEST_NAME_INTRO + userName;
+            loggedInUserName = userName;
         }
         currentUserInformationJson.socialServiceUsed = user.getServiceName();
         currentUserInformationJson.loggedInUserName = loggedInUserName; //user who logged in via social
@@ -92,12 +90,12 @@ public class CurrentUserProvider {
         String loggedInUserName = "";
         if (principal instanceof AuthenticatedUser) {
             AuthenticatedUser user = (AuthenticatedUser) principal;
-            loggedInUserName = GUEST_NAME_INTRO + "Anonymous";
+            loggedInUserName = "Anonymous";
             if (principal instanceof GoogleUser) {
-                loggedInUserName = GUEST_NAME_INTRO + user.getSocial().getGoogleUserName();
+                loggedInUserName = user.getSocial().getGoogleUserName();
             }
             if (principal instanceof FacebookUser) {
-                loggedInUserName = GUEST_NAME_INTRO + user.getSocial().getFacebookUserName();
+                loggedInUserName = user.getSocial().getFacebookUserName();
             }
         }
         return loggedInUserName;

@@ -48,7 +48,7 @@ public class FacebookOauth2Service extends Oauth2ServiceBase {
     private final Logger logger = LoggerFactory.getLogger(FacebookOauth2Service.class);
 
     @Autowired
-    private AdorationCustomAuthenticationProvider adorationCustomAuthenticationProvider;
+    private ApplicationCustomAuthenticationProvider applicationCustomAuthenticationProvider;
     @Autowired
     private WebAppConfigurationAccess webAppConfigurationAccess;
     @Autowired
@@ -157,7 +157,7 @@ public class FacebookOauth2Service extends Oauth2ServiceBase {
             facebookUser = new FacebookUser(social, propertyDto.getSessionTimeout());
 
             // googleUser used as Principal, credential is coming from Google
-            authentication = adorationCustomAuthenticationProvider.authenticate(new PreAuthenticatedAuthenticationToken(facebookUser, facebookUserInfoJson));
+            authentication = applicationCustomAuthenticationProvider.authenticate(new PreAuthenticatedAuthenticationToken(facebookUser, facebookUserInfoJson));
         } catch (Exception e) {
             logger.warn("Was unable to get Facebook User Information.", e);
         }

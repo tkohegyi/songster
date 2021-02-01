@@ -16,14 +16,6 @@
       }
     },
     {
-      "id": "personId",
-      "type": "id-nullable",
-      "text": "Adoráló azonosítója:",
-      "name": "Adoráló azonosítója",
-      "helpText": "A felhasználó/adoráló azonosítószáma.",
-      "mandatory": false
-    },
-    {
       "id": "socialStatus",
       "text": "Státusz:",
       "type": "singleSelect",
@@ -31,8 +23,10 @@
       "mandatory": true,
       "selection": [
         { "id": 1, "value": "Azonosításra vár" },
-        { "id": 2, "value": "Azonosított adoráló" },
-        { "id": 3, "value": "Vendég/érdeklődő" }
+        { "id": 2, "value": "Vendég" },
+        { "id": 3, "value": "Regisztrált" },
+        { "id": 4, "value": "Privilegizált" },
+        { "id": 5, "value": "Adminisztrátor" }
       ],
       "edit": {
         "visible" : true
@@ -109,7 +103,7 @@
       "helpText": "Felhasználó UID-je Google-ban."
     },
     {
-      "id": "adminComment",
+      "id": "comment",
       "type": "input-1024",
       "name": "Comment",
       "text": "Comment:",

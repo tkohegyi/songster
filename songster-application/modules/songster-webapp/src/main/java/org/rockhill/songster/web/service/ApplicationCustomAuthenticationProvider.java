@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Custom Authentication Provider for Adoration application.
+ * Custom Authentication Provider for the application.
  */
 @Component
-public class AdorationCustomAuthenticationProvider implements AuthenticationProvider {
+public class ApplicationCustomAuthenticationProvider implements AuthenticationProvider {
 
     /**
      * Do the custom authentication for the application.
@@ -33,7 +33,6 @@ public class AdorationCustomAuthenticationProvider implements AuthenticationProv
             if (social != null) {
                 //authenticated !
                 List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-                //grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER")); //we don't need it
                 validAuthentication = new PreAuthenticatedAuthenticationToken(googleUser, authentication.getCredentials(), grantedAuthorities);
                 //google login success
             }
@@ -44,7 +43,6 @@ public class AdorationCustomAuthenticationProvider implements AuthenticationProv
             if (social != null) {
                 //authenticated !
                 List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-                //grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER")); //we don't need it
                 validAuthentication = new PreAuthenticatedAuthenticationToken(facebookUser, authentication.getCredentials(), grantedAuthorities);
                 //facebook login success
             }
