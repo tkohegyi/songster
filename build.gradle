@@ -1,61 +1,29 @@
 plugins {
-    id "org.sonarqube" version "3.0"
+	id 'org.springframework.boot' version '2.6.3'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
 }
 
-subprojects {
-    ext.mainVersion=0.1
+group = 'magyar.website.dalos'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
 
-    group = 'org.rockhill.songster'
-    apply plugin: 'idea'
-    apply plugin: 'checkstyle'
-    apply plugin: 'java'
-    apply plugin: 'maven'
-    apply plugin: 'jacoco'
-
-    jacoco {
-        toolVersion = "0.8.6"
-    }
-    jacocoTestReport {
-        reports {
-            xml.enabled true
-        }
-    }
-    test.finalizedBy jacocoTestReport
-
-    compileJava {options.encoding = "UTF-8"}
-
-    version = "$mainVersion"+'.'+"$buildNumber"
-
-    repositories {
-        jcenter()
-        maven { url "https://repo.maven.apache.org/maven2" }
-    }
-
-// Source and target info
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
-
-    task sourceZip(type: Zip) {
-        from 'src'
-        baseName = "$componentName"
-        classifier 'sources'
-        extension 'jar'
-    }
-
-    checkstyle.configFile = file("$rootProject.rootDir/config/checkstyle/checkstyle.xml")
-    checkstyle.configProperties = ['samedir' : "$rootProject.rootDir/config/checkstyle"]
-    checkstyle.toolVersion = '8.0'
-    checkstyle.ignoreFailures = true
-
-    subprojects {
-        task allDeps(type: DependencyReportTask) {}
-    }
+repositories {
+	mavenCentral()
 }
 
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client:2.6.3'
+	implementation 'org.springframework.boot:spring-boot-starter-web:2.6.3'
+	implementation 'org.springframework.session:spring-session-core:2.6.1'
+	runtimeOnly 'org.postgresql:postgresql:42.3.1'
+	runtimeOnly 'org.webjars:jquery:3.6.0'
+	runtimeOnly 'org.webjars:bootstrap:5.1.1'
+	runtimeOnly 'org.webjars:webjars-locator-core:0.48'
+	runtimeOnly 'org.webjars:js-cookie:2.2.1'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.3'
+}
 
-if (hasProperty('buildScan')) {
-    buildScan {
-        termsOfServiceUrl = 'https://gradle.com/terms-of-service'
-        termsOfServiceAgree = 'yes'
-    }
+tasks.named('test') {
+	useJUnitPlatform()
 }

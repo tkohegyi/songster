@@ -1,2 +1,0 @@
-# songster
-Dalok Isten Dicsőítésére

@@ -1,12 +1,1 @@
-rootProject.name = 'songster'
-
-include 'songster-application'
-include 'songster-application:songster-core'
-include 'songster-application:songster-webapp'
-include 'songster-application:songster-engine'
-include 'songster-application:songster-database'
-
-for (subproject in (project(':songster-application')).children){
-	subproject.projectDir = file("$rootDir/songster-application/modules/$subproject.name")
-}
-
+rootProject.name = 'Songs-to-the-Glory-of-God'
