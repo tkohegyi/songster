@@ -1,9 +1,12 @@
 package magyar.website.dalos.database.tables;
 
+import magyar.website.dalos.database.tables.help.TableSupport;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Objects;
 
 /**
  * Descriptor class for Database table: Social.
@@ -61,11 +64,7 @@ public class Social {
      */
     @Column(name = "googleEmail", nullable = true)
     public String getGoogleEmail() {
-        if (googleEmail != null) {
-            return googleEmail;
-        } else {
-            return "";
-        }
+        return Objects.requireNonNullElse(googleEmail, TableSupport.EMPTY_STRING);
     }
 
     public void setGoogleEmail(String googleEmail) {
@@ -79,11 +78,7 @@ public class Social {
      */
     @Column(name = "googleUserName", nullable = true)
     public String getGoogleUserName() {
-        if (googleUserName != null) {
-            return googleUserName;
-        } else {
-            return "";
-        }
+        return Objects.requireNonNullElse(googleUserName, TableSupport.EMPTY_STRING);
     }
 
     public void setGoogleUserName(String googleUserName) {
@@ -97,11 +92,7 @@ public class Social {
      */
     @Column(name = "googleUserId", nullable = true)
     public String getGoogleUserId() {
-        if (googleUserId != null) {
-            return googleUserId;
-        } else {
-            return "";
-        }
+        return Objects.requireNonNullElse(googleUserId, TableSupport.EMPTY_STRING);
     }
 
     public void setGoogleUserId(String googleUserId) {
@@ -115,11 +106,7 @@ public class Social {
      */
     @Column(name = "googleUserPicture", nullable = true)
     public String getGoogleUserPicture() {
-        if (googleUserPicture != null) {
-            return googleUserPicture;
-        } else {
-            return "";
-        }
+        return Objects.requireNonNullElse(googleUserPicture, TableSupport.EMPTY_STRING);
     }
 
     public void setGoogleUserPicture(String googleUserPicture) {
@@ -133,11 +120,7 @@ public class Social {
      */
     @Column(name = "facebookEmail", nullable = true)
     public String getFacebookEmail() {
-        if (facebookEmail != null) {
-            return facebookEmail;
-        } else {
-            return "";
-        }
+        return Objects.requireNonNullElse(facebookEmail, TableSupport.EMPTY_STRING);
     }
 
     public void setFacebookEmail(String facebookEmail) {
@@ -151,11 +134,7 @@ public class Social {
      */
     @Column(name = "facebookUserName", nullable = true)
     public String getFacebookUserName() {
-        if (facebookUserName != null) {
-            return facebookUserName;
-        } else {
-            return "";
-        }
+        return Objects.requireNonNullElse(facebookUserName, TableSupport.EMPTY_STRING);
     }
 
     public void setFacebookUserName(String facebookUserName) {
@@ -169,15 +148,67 @@ public class Social {
      */
     @Column(name = "facebookUserId", nullable = true)
     public String getFacebookUserId() {
-        if (facebookUserId != null) {
-            return facebookUserId;
-        } else {
-            return "";
-        }
+        return Objects.requireNonNullElse(facebookUserId, TableSupport.EMPTY_STRING);
     }
 
     public void setFacebookUserId(String facebookUserId) {
         this.facebookUserId = facebookUserId;
+    }
+
+    /**
+     * Gets githubEmail field of a Social record, ensures that it never will have null value.
+     *
+     * @return with the githubEmail field value or with an empty string.
+     */
+    @Column(name = "githubEmail", nullable = true)
+    public String getGithubEmail() {
+        return Objects.requireNonNullElse(githubEmail, TableSupport.EMPTY_STRING);
+    }
+
+    public void setGithubEmail(String githubEmail) {
+        this.githubEmail = githubEmail;
+    }
+
+    /**
+     * Gets githubUserName field of a Social record, ensures that it never will have null value.
+     *
+     * @return with the githubUserName field value or with an empty string.
+     */
+    @Column(name = "githubUserName", nullable = true)
+    public String getGithubUserName() {
+        return Objects.requireNonNullElse(githubUserName, TableSupport.EMPTY_STRING);
+    }
+
+    public void setGithubUserName(String githubUserName) {
+        this.githubUserName = githubUserName;
+    }
+
+    /**
+     * Gets githubUserId field of a Social record, ensures that it never will have null value.
+     *
+     * @return with the githubUserId field value or with an empty string.
+     */
+    @Column(name = "githubUserId", nullable = true)
+    public String getGithubUserId() {
+        return Objects.requireNonNullElse(githubUserId, TableSupport.EMPTY_STRING);
+    }
+
+    public void setGithubUserId(String githubUserId) {
+        this.githubUserId = githubUserId;
+    }
+
+    /**
+     * Gets githubUserPicture field of a Social record, ensures that it never will have null value.
+     *
+     * @return with the githubUserPicture field value or with an empty string.
+     */
+    @Column(name = "githubUserPicture", nullable = true)
+    public String getGithubUserPicture() {
+        return Objects.requireNonNullElse(githubUserPicture, TableSupport.EMPTY_STRING);
+    }
+
+    public void setGithubUserPicture(String githubUserPicture) {
+        this.githubUserPicture = githubUserPicture;
     }
 
     /**
@@ -187,11 +218,7 @@ public class Social {
      */
     @Column(name = "comment", nullable = true)
     public String getComment() {
-        if (comment != null) {
-            return comment;
-        } else {
-            return "";
-        }
+        return Objects.requireNonNullElse(comment, TableSupport.EMPTY_STRING);
     }
 
     public void setComment(String comment) {
