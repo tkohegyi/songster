@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
-    static private final Logger logger = LoggerFactory.getLogger(LoginSuccessHandler.class);
+public class OnLoginSuccess extends SavedRequestAwareAuthenticationSuccessHandler {
+    static private final Logger logger = LoggerFactory.getLogger(OnLoginSuccess.class);
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {

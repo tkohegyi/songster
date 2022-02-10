@@ -1,6 +1,7 @@
 package magyar.website.dalos;
 
-import magyar.website.dalos.web.oauth2.LoginSuccessHandler;
+import magyar.website.dalos.web.oauth2.OnLoginSuccess;
+import magyar.website.dalos.web.oauth2.OnLogoutSuccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,14 +19,17 @@ public class SongsToTheGloryOfGodApplication extends WebSecurityConfigurerAdapte
 	}
 
 	@Autowired
-	private LoginSuccessHandler loginSuccessHandler;
+	private OnLoginSuccess loginSuccessHandler;
+
+	@Autowired
+	private OnLogoutSuccess onLogoutSuccess;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// @formatter:off
 		http.authorizeRequests(a -> a.antMatchers("/", "/error", "/webjars/**").permitAll().anyRequest().authenticated())
 				.exceptionHandling(e -> e.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
-				.logout(l -> l.logoutSuccessUrl("/").permitAll())
+				.logout(l -> l.logoutSuccessUrl("/").logoutSuccessHandler(onLogoutSuccess).invalidateHttpSession(true).deleteCookies("JSESSIONID").permitAll())
 				.csrf(c -> c.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
 				.oauth2Login(o -> o.successHandler(loginSuccessHandler));
 		// @formatter:on
