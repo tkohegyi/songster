@@ -1,11 +1,17 @@
 package magyar.website.dalos.database.tables;
 
+import magyar.website.dalos.database.tables.help.SocialServiceTypes;
+import magyar.website.dalos.database.tables.help.SocialStatusTypes;
 import magyar.website.dalos.database.tables.help.TableSupport;
+import magyar.website.dalos.exception.DatabaseHandlingException;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Objects;
 
 /**
@@ -18,18 +24,15 @@ public class Social {
 
     private Long id;
     private Boolean isLoggedIn;
+    private Integer socialStatus;
+    private Integer socialService;
     private String lastLoginDateTime;
-    private String googleEmail;
-    private String googleUserName;
-    private String googleUserId;
-    private String googleUserPicture;
-    private String facebookEmail;
-    private String facebookUserName;
-    private String facebookUserId;
-    private String githubEmail;
-    private String githubUserName;
-    private String githubUserId;
-    private String githubUserPicture;
+    private String dhcSignedDate;
+    private String userId;
+    private String email;
+    private String userName;
+    private String userPicture;
+    private String otherInfo;
     private String comment;
 
     /**
@@ -57,158 +60,168 @@ public class Social {
         this.isLoggedIn = isLoggedIn;
     }
 
-    /**
-     * Gets googleEmail field of a Social record, ensures that it never will have null value.
-     *
-     * @return with the googleEmail field value or with an empty string.
-     */
-    @Column(name = "googleEmail", nullable = true)
-    public String getGoogleEmail() {
-        return Objects.requireNonNullElse(googleEmail, TableSupport.EMPTY_STRING);
-    }
-
-    public void setGoogleEmail(String googleEmail) {
-        this.googleEmail = googleEmail;
+    @Column(name = "socialStatus", nullable = false)
+    public Integer getSocialStatus() {
+        return socialStatus;
     }
 
     /**
-     * Gets googleUserName field of a Social record, ensures that it never will have null value.
+     * Sets the id of the social status of the social user.
      *
-     * @return with the googleUserName field value or with an empty string.
+     * @param socialStatus is the status id
+     * @throws DatabaseHandlingException if the id is not valid
      */
-    @Column(name = "googleUserName", nullable = true)
-    public String getGoogleUserName() {
-        return Objects.requireNonNullElse(googleUserName, TableSupport.EMPTY_STRING);
+    public void setSocialStatus(Integer socialStatus) {
+        SocialStatusTypes.getTypeFromId(socialStatus); //validation
+        this.socialStatus = socialStatus;
     }
 
-    public void setGoogleUserName(String googleUserName) {
-        this.googleUserName = googleUserName;
+    @Column(name = "socialService", nullable = false)
+    public Integer getSocialService() {
+        return socialService;
     }
 
     /**
-     * Gets googleUserId field of a Social record, ensures that it never will have null value.
+     * Sets the id of the social service of the social user.
      *
-     * @return with the googleUserId field value or with an empty string.
+     * @param socialService is the socialService id
+     * @throws DatabaseHandlingException if the id is not valid
      */
-    @Column(name = "googleUserId", nullable = true)
-    public String getGoogleUserId() {
-        return Objects.requireNonNullElse(googleUserId, TableSupport.EMPTY_STRING);
-    }
-
-    public void setGoogleUserId(String googleUserId) {
-        this.googleUserId = googleUserId;
+    public void setSocialService(Integer socialService) {
+        SocialServiceTypes.getTypeFromId(socialService); //validation
+        this.socialService = socialService;
     }
 
     /**
-     * Gets googleUserPicture field of a Social record, ensures that it never will have null value.
+     * Gets dhcSignedDate field of a Person record, ensures that it never will have null value.
      *
-     * @return with the googleUserPicture field value or with an empty string.
+     * @return with the dhcSignedDate field value or with an empty string.
      */
-    @Column(name = "googleUserPicture", nullable = true)
-    public String getGoogleUserPicture() {
-        return Objects.requireNonNullElse(googleUserPicture, TableSupport.EMPTY_STRING);
-    }
-
-    public void setGoogleUserPicture(String googleUserPicture) {
-        this.googleUserPicture = googleUserPicture;
+    @Column(name = "dhcSignedDate", nullable = false)
+    public String getDhcSignedDate() {
+        return dhcSignedDate;
     }
 
     /**
-     * Gets facebookEmail field of a Social record, ensures that it never will have null value.
+     * Sets the data handling consent date according to the given string, that must be in "YYYY-MM-DD" format.
+     * This have to be filled during the very first login event.
      *
-     * @return with the facebookEmail field value or with an empty string.
+     * @param dhcSignedDate is the string format of the date
+     * @throws DatabaseHandlingException if the string format/content is invalid
      */
-    @Column(name = "facebookEmail", nullable = true)
-    public String getFacebookEmail() {
-        return Objects.requireNonNullElse(facebookEmail, TableSupport.EMPTY_STRING);
-    }
-
-    public void setFacebookEmail(String facebookEmail) {
-        this.facebookEmail = facebookEmail;
+    public void setDhcSignedDate(String dhcSignedDate) {
+        if (dhcSignedDate == null) {
+            throw new DatabaseHandlingException("DhcSignedDate date format is unacceptable, it must be YYYY-MM-DD");
+        }
+        try {
+            DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd");
+            df1.parse(dhcSignedDate);
+        } catch (ParseException e) {
+            throw new DatabaseHandlingException("DhcSignedDate date format is unacceptable, it must be YYYY-MM-DD");
+        }
+        this.dhcSignedDate = dhcSignedDate;
     }
 
     /**
-     * Gets facebookUserName field of a Social record, ensures that it never will have null value.
+     * Gets lastLoginDateTime field of a record, ensures that it never will have null value.
      *
-     * @return with the facebookUserName field value or with an empty string.
+     * @return with the lastLoginDateTime field value.
      */
-    @Column(name = "facebookUserName", nullable = true)
-    public String getFacebookUserName() {
-        return Objects.requireNonNullElse(facebookUserName, TableSupport.EMPTY_STRING);
-    }
-
-    public void setFacebookUserName(String facebookUserName) {
-        this.facebookUserName = facebookUserName;
+    @Column(name = "lastLoginDateTime", nullable = false)
+    public String getLastLoginDateTime() {
+        return lastLoginDateTime;
     }
 
     /**
-     * Gets facebookUserId field of a Social record, ensures that it never will have null value.
+     * Sets the lastLoginDateTime field according to the given string, that must be in "YYYY-MM-DD HH:NN:SS.SSS" format.
      *
-     * @return with the facebookUserId field value or with an empty string.
+     * @param lastLoginDateTime is the string format of the date
+     * @throws DatabaseHandlingException if the string format/content is invalid
      */
-    @Column(name = "facebookUserId", nullable = true)
-    public String getFacebookUserId() {
-        return Objects.requireNonNullElse(facebookUserId, TableSupport.EMPTY_STRING);
-    }
-
-    public void setFacebookUserId(String facebookUserId) {
-        this.facebookUserId = facebookUserId;
+    public void setLastLoginDateTime(String lastLoginDateTime) {
+        if (lastLoginDateTime == null) {
+            throw new DatabaseHandlingException("LastLoginDateTime date format is unacceptable, it must be YYYY-MM-DD HH:NN:SS.SSS");
+        }
+        try {
+            DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd HH:NN:SS.SSS");
+            df1.parse(lastLoginDateTime);
+        } catch (ParseException e) {
+            throw new DatabaseHandlingException("LastLoginDateTime date format is unacceptable, it must be YYYY-MM-DD HH:NN:SS.SSS");
+        }
+        this.lastLoginDateTime = lastLoginDateTime;
     }
 
     /**
-     * Gets githubEmail field of a Social record, ensures that it never will have null value.
+     * Gets email field of a Social record, ensures that it never will have null value.
      *
-     * @return with the githubEmail field value or with an empty string.
+     * @return with the email field value.
      */
-    @Column(name = "githubEmail", nullable = true)
-    public String getGithubEmail() {
-        return Objects.requireNonNullElse(githubEmail, TableSupport.EMPTY_STRING);
+    @Column(name = "email", nullable = false)
+    public String getEmail() {
+        return email;
     }
 
-    public void setGithubEmail(String githubEmail) {
-        this.githubEmail = githubEmail;
+    public void setEmail(String email) {
+        if (email == null) {
+            throw new DatabaseHandlingException("User email cannot be null");
+        }
+        this.email = email;
     }
 
     /**
-     * Gets githubUserName field of a Social record, ensures that it never will have null value.
+     * Gets userName field of a Social record, ensures that it never will have null value.
      *
-     * @return with the githubUserName field value or with an empty string.
+     * @return with the userName field value or with an empty string.
      */
-    @Column(name = "githubUserName", nullable = true)
-    public String getGithubUserName() {
-        return Objects.requireNonNullElse(githubUserName, TableSupport.EMPTY_STRING);
+    @Column(name = "userName", nullable = false)
+    public String getUserName() {
+        return userName;
     }
 
-    public void setGithubUserName(String githubUserName) {
-        this.githubUserName = githubUserName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     /**
-     * Gets githubUserId field of a Social record, ensures that it never will have null value.
+     * Gets userId field of a Social record, ensures that it never will have null value.
      *
-     * @return with the githubUserId field value or with an empty string.
+     * @return with the userId field value.
      */
-    @Column(name = "githubUserId", nullable = true)
-    public String getGithubUserId() {
-        return Objects.requireNonNullElse(githubUserId, TableSupport.EMPTY_STRING);
+    @Column(name = "userId", nullable = false)
+    public String getUserId() {
+        return userId;
     }
 
-    public void setGithubUserId(String githubUserId) {
-        this.githubUserId = githubUserId;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     /**
-     * Gets githubUserPicture field of a Social record, ensures that it never will have null value.
+     * Gets userPicture field of a Social record, ensures that it never will have null value.
      *
-     * @return with the githubUserPicture field value or with an empty string.
+     * @return with the userPicture field value.
      */
-    @Column(name = "githubUserPicture", nullable = true)
-    public String getGithubUserPicture() {
-        return Objects.requireNonNullElse(githubUserPicture, TableSupport.EMPTY_STRING);
+    @Column(name = "userPicture", nullable = false)
+    public String getUserPicture() {
+        return userPicture;
     }
 
-    public void setGithubUserPicture(String githubUserPicture) {
-        this.githubUserPicture = githubUserPicture;
+    public void setUserPicture(String userPicture) {
+        this.userPicture = userPicture;
+    }
+
+    /**
+     * Gets otherInfo field of a Social record, ensures that it never will have null value.
+     *
+     * @return with the otherInfo field value or with an empty string.
+     */
+    @Column(name = "otherInfo", nullable = true)
+    public String getOtherInfo() {
+        return Objects.requireNonNullElse(otherInfo, TableSupport.EMPTY_STRING);
+    }
+
+    public void setOtherInfo(String otherInfo) {
+        this.otherInfo = otherInfo;
     }
 
     /**
