@@ -6,8 +6,12 @@ import magyar.website.dalos.exception.DatabaseHandlingException;
  * Enum to represent status of a Social record.
  */
 public enum SocialStatusTypes {
-    NOT_IDENTIFIED("Waiting for Identification", 1),
-    IDENTIFIED("Identified/Trusted User", 2);
+    SELF_PREPARED("Self-Service - Prepared User", 1),
+    SELF_INVITATION_REQUESTED("Self-Service - Invitation Requested", 2),
+    SELF_INVITED("Self-Service - Invited", 3),
+    OBSOLETE("Obsolete User", 4),
+    NOT_IDENTIFIED("Waiting for Identification", 5),
+    IDENTIFIED("Identified/Trusted User", 6);
 
     private final String translatedText;
     private final Integer typeValue;

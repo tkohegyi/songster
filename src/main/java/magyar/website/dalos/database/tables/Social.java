@@ -212,12 +212,13 @@ public class Social {
 
     /**
      * Gets otherInfo field of a Social record, ensures that it never will have null value.
+     * This is an embedded JSON object - see {@link magyar.website.dalos.database.tables.help.OtherInfoJson}
      *
      * @return with the otherInfo field value or with an empty string.
      */
     @Column(name = "otherInfo", nullable = true)
     public String getOtherInfo() {
-        return Objects.requireNonNullElse(otherInfo, TableSupport.EMPTY_STRING);
+        return Objects.requireNonNullElse(otherInfo, TableSupport.EMPTY_JSON);
     }
 
     public void setOtherInfo(String otherInfo) {
